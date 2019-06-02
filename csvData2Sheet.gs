@@ -3,7 +3,7 @@ function parseCSVData() {
   //  SETUP AREA //
   /////////////////
   
-  var csvUrl = "https://github.com/plscks/libConglomerate/raw/mapData/testCSV.csv"
+  var csvUrl = "https://github.com/plscks/ncMappingScript/raw/master/testCSV.csv"
   var csvContent = UrlFetchApp.fetch(csvUrl).getContentText();
   var csvData = Utilities.parseCsv(csvContent);
   var sheet = SpreadsheetApp.getActiveSheet();
