@@ -137,3 +137,4 @@ var charinfo;
 try {
     charinfo = getCharacterInfo(charinfodiv);
 } catch (err) { logNCms('Error parsing charinfo: '+err.message); }
+})();
