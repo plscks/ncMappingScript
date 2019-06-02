@@ -55,7 +55,7 @@ try {
         this.GM_deleteValue = function (key) { return delete localStorage[key]; };
     }
 } catch (e) { logNCms('GM_set/get error: ' + e.message); }
-}
+
 
 //#############################################################################
 // Generic functions
