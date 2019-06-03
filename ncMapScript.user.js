@@ -11,7 +11,11 @@
 // @exclude        *://www.nexusclash.com/modules.php?name=Game&op=disconnect
 // @grant          GM_getValue
 // @grant          GM_setValue
-// @grant          GM_getResourceText
+// @grant          GM_getResourceURL
+// @grant          GM.getValue
+// @grant          GM.setValue
+// @grant          GM.deleteValue
+// @grant          GM.getResourceUrl
 // ==/UserScript==
 
 ////////////////////////
@@ -35,4 +39,30 @@
 // https://github.com/AnneTrue/libConglomerate
 //////////////////////////////////////////////////////////
 
+function ncMappingScript() {
+  var versionStr = '0.1.1';
+  var NCmsLogging = true;
+  var NCmsLoggingVerbose = false;
 
+  try {
+    if (!this.GM_getValue || (this.GM_getValue.toString && this.GM_getValue.toString().indexOf('not supported') > -1)) {
+        this.GM_getValue = (key, def) => { localStorage[key] || def; };
+        this.GM_setValue = (key, value) => { localStorage[key] = value; return true; };
+        this.GM_deleteValue = function (key) { return delete localStorage[key]; };
+      }
+  } catch (e) { logNCms('GM_set/get error: ' + e.message); }
+
+  var tiledescription = document.getElementsByClassName('tile_description')[0];
+  console.log(tiledescription)
+
+  var mapinfo = document.getElementById('Map');
+  console.log(mapinfo)
+
+  function logNCms(message, verbose=false) {
+    if (!NCmsLogging) { return; }
+    if (verbose && !NCmsLoggingVerbose) { return; }
+    console.log('[NCms] [ver:'+versionStr+']:  '+message);
+  }
+}
+
+ncMappingScript();
