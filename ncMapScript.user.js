@@ -54,10 +54,10 @@ function ncMappingScript() {
 
   var tiledescription = document.getElementsByClassName('tile_description')[0];
   console.log(tiledescription)
-  var Xmatch = "/(?<=\s\()\d{1,2}(?!=,\s)/"
-  var Ymatch = "/(?<=,\s)\d{1,2}(?!=\s\w)/"
-  var xCoord = tiledescription.match(Xmatch)
-  console.log("X Coord: " + xCoord)
+  var Xmatch = "/(?<=\s\()\d{1,2}(?!=,\s)/";
+  var Ymatch = "/(?<=,\s)\d{1,2}(?!=\s\w)/";
+  var xCoord = tiledescription.match(Xmatch);
+  console.log("X Coord: " + xCoord);
 
   var mapinfo = document.getElementById('Map');
   console.log(mapinfo)
