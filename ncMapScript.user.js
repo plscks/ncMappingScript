@@ -54,9 +54,10 @@ function ncMappingScript() {
 
   var tiledescription = document.getElementsByClassName('tile_description')[0];
   console.log(tiledescription)
-  var stringDesc;
-  GM.setValue(stringDesc, JSON.stringify(tiledescription));
-  console.log(stringDesc);
+  var Xmatch = "/(?<=\s\()\d{1,2}(?!=,\s)/"
+  var Ymatch = "/(?<=,\s)\d{1,2}(?!=\s\w)/"
+  var xCoord = tiledescription.match(Xmatch)
+  console.log("X Coord: " + xCoord)
 
   var mapinfo = document.getElementById('Map');
   console.log(mapinfo)
