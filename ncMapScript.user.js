@@ -54,6 +54,9 @@ function ncMappingScript() {
 
   var tiledescription = document.getElementsByClassName('tile_description')[0];
   console.log(tiledescription)
+  var stringDesc;
+  GM.setValue(stringDesc, JSON.stringify(tiledescription));
+  console.log(stringDesc);
 
   var mapinfo = document.getElementById('Map');
   console.log(mapinfo)
