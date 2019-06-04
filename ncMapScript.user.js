@@ -52,6 +52,7 @@ function ncMappingScript() {
       }
   } catch (e) { logNCms('GM_set/get error: ' + e.message); }
 
+  // Catches error if there is no tile description i.e. - your character is dead
   try {
     var tiledescription = document.getElementsByClassName('tile_description')[0].innerText;
   }
@@ -60,20 +61,17 @@ function ncMappingScript() {
     return;
   }
 
+
+  //Grabs the x and y coordinate of current tile and all map data stops if map not open
   var xCoord = tiledescription.match(/(?<=\s\()\d{1,2}(?!=\,\s)/);
   var yCoord = tiledescription.match(/(?<=\,\s)\d{1,2}(?!=\s\w)/);
-  console.log("Coordinates: (" + xCoord + ", " + yCoord + ")");
-
   var mapinfo = document.getElementById('Map');
   if (mapinfo == null) {
     logNCms("Map pane not open or no map data!");
     return;
   }
-  //var topRow = mapinfo.getElementsByTagName("tr")[0];
-  //var firstTile = topRow.getElementsByTagName("td")[0];
-  //var color = firstTile.getAttribute("bgcolor")
-  //console.log("Top left tile color: " + color);
 
+  // loads map table and splits cells to grab bgcolor of tiles
   var table = document.getElementById('Map');
   var cells = table.getElementsByTagName('td');
 
@@ -87,7 +85,8 @@ function ncMappingScript() {
     console.log("bgcolors: " + bgcolors[k]);
   }
 
-  function logNCms(message, verbose=false) {
+  // A simplle error logging function
+    function logNCms(message, verbose=false) {
     if (!NCmsLogging) { return; }
     if (verbose && !NCmsLoggingVerbose) { return; }
     console.log('[NCms] [ver:'+versionStr+']:  '+message);
