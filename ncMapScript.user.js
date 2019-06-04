@@ -74,6 +74,16 @@ function ncMappingScript() {
   var color = firstTile.getAttribute("bgcolor")
   console.log("Top left tile color: " + color);
 
+  var table = document.getElementById('Map');
+  var cells = table.getElementsByTagName('td');
+
+  var bgcolors = []
+  for (var i=0,len=cells.length; i<len; i++) {
+    console.log(cells[i].getAttribute("bgcolor"));
+    if (/\#....../.test(cells[i].getAttribute("bgcolor")) == true) bgcolors.push(cells[i].getAttribute("bgcolor"));
+  }
+
+  console.log(bgcolors[1]);
 
   function logNCms(message, verbose=false) {
     if (!NCmsLogging) { return; }
