@@ -69,21 +69,23 @@ function ncMappingScript() {
     logNCms("Map pane not open or no map data!");
     return;
   }
-  var topRow = mapinfo.getElementsByTagName("tr")[0];
-  var firstTile = topRow.getElementsByTagName("td")[0];
-  var color = firstTile.getAttribute("bgcolor")
-  console.log("Top left tile color: " + color);
+  //var topRow = mapinfo.getElementsByTagName("tr")[0];
+  //var firstTile = topRow.getElementsByTagName("td")[0];
+  //var color = firstTile.getAttribute("bgcolor")
+  //console.log("Top left tile color: " + color);
 
   var table = document.getElementById('Map');
   var cells = table.getElementsByTagName('td');
 
   var bgcolors = []
-  for (var i=0,len=cells.length; i<len; i++) {
+  for (var i = 0, len = cells.length; i < len; i++) {
     console.log(cells[i].getAttribute("bgcolor"));
     if (/\#....../.test(cells[i].getAttribute("bgcolor")) == true) bgcolors.push(cells[i].getAttribute("bgcolor"));
   }
 
-  console.log(bgcolors[1]);
+  for (var k = 0; k < bgcolors.length; k++) {
+    console.log("bgcolors: " + bgcolors[k]);
+  }
 
   function logNCms(message, verbose=false) {
     if (!NCmsLogging) { return; }
