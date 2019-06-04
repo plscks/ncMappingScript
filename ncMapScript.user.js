@@ -56,7 +56,7 @@ function ncMappingScript() {
     var tiledescription = document.getElementsByClassName('tile_description')[0].innerText;
   }
   catch(error) {
-    console.log("No tile description");
+    logNCms("No tile description");
     return;
   }
 
@@ -66,7 +66,7 @@ function ncMappingScript() {
 
   var mapinfo = document.getElementById('Map');
   if (mapinfo == null) {
-    console.log("Map pane not open or no map data!");
+    logNCms("Map pane not open or no map data!");
     return;
   }
   var topRow = mapinfo.getElementsByTagName("tr")[0];
