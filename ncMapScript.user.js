@@ -24,8 +24,8 @@
 // Hi! Please hang with me
 // I have no idea how userscripts work
 // but in my defense I had no idea how
-// Google Apps Scripts worked yesterday
-// and well, here we are!
+// Google Apps Scripts worked a day before
+// I started this and well, here we are!
 // None of this is intended to be stolen code
 // it is mearly borrowed code, I'm still digesting
 // how much of the borrowed code I really need.
@@ -69,7 +69,10 @@ function ncMappingScript() {
     console.log("Map pane not open or no map data!");
     return;
   }
-  console.log(mapinfo);
+  var topRow = mapinfo.getElementsByTagName("tr")[0];
+  var firstTile = topRow.getElementsByTagName("td")[0];
+  var color = firstTile.getAttribute("bgcolor")
+  console.log("Top left tile color: " + color);
 
 
   function logNCms(message, verbose=false) {
