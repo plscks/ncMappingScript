@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.3
+// @version        0.1.4
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -40,7 +40,7 @@
 //////////////////////////////////////////////////////////
 
 function ncMappingScript() {
-  var versionStr = '0.1.3';
+  var versionStr = '0.1.4';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
 
@@ -77,7 +77,6 @@ function ncMappingScript() {
 
   var bgcolors = []
   for (var i = 0, len = cells.length; i < len; i++) {
-    console.log(cells[i].getAttribute("bgcolor"));
     if (/\#....../.test(cells[i].getAttribute("bgcolor")) == true) bgcolors.push(cells[i].getAttribute("bgcolor"));
   }
 
