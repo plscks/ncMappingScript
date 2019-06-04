@@ -52,18 +52,16 @@ function ncMappingScript() {
       }
   } catch (e) { logNCms('GM_set/get error: ' + e.message); }
 
-  var tiledescription = document.getElementsByClassName('tile_description')[0];
-  console.log(tiledescription)
-
-  for (var i = 0; i < tiledescriptions.length; i++) {
-    var price = tiledescription[i].innerText;
-    console.log("Price: " + price);
+  try {
+    var tiledescription = document.getElementsByClassName('tile_description')[0].innerText;
+  }
+  catch(error) {
+    console.log("No tile description");
   }
 
-  var Xmatch = "/(?<=\s\()\d{1,2}(?!=,\s)/";
-  var Ymatch = "/(?<=,\s)\d{1,2}(?!=\s\w)/";
-  //var xCoord = tiledescription.match(Xmatch);
-  //console.log("X Coord: " + xCoord);
+  var xCoord = tiledescription.match(/(?<=\s\()\d{1,2}(?!=\,\s)/);
+  var yCoord = tiledescription.match(/(?<=\,\s)\d{1,2}(?!=\s\w)/);
+  console.log("Coordinates: (" + xCoord + ", " + yCoord + ")");
 
   var mapinfo = document.getElementById('Map');
   console.log(mapinfo)
