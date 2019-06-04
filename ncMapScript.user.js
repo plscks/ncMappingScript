@@ -57,6 +57,7 @@ function ncMappingScript() {
   }
   catch(error) {
     console.log("No tile description");
+    return;
   }
 
   var xCoord = tiledescription.match(/(?<=\s\()\d{1,2}(?!=\,\s)/);
@@ -64,7 +65,12 @@ function ncMappingScript() {
   console.log("Coordinates: (" + xCoord + ", " + yCoord + ")");
 
   var mapinfo = document.getElementById('Map');
-  console.log(mapinfo)
+  if (mapinfo == null) {
+    console.log("Map pane not open or no map data!");
+    return;
+  }
+  console.log(mapinfo);
+
 
   function logNCms(message, verbose=false) {
     if (!NCmsLogging) { return; }
