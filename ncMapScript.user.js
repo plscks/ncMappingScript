@@ -90,7 +90,7 @@ function ncMappingScript() {
   // X coords
   var xArray = []
   for (var i = 0; i < 5; i++) {
-    for (var j = -2; j < 2; j++) {xArray.push(String(xInt + j))}
+    for (var j = -2; j < 3; j++) {xArray.push(String(xInt + j))}
   }
 
   for (var i = 0; i < xArray.length; i++) {console.log(xArray[i])}
