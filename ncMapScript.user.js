@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.6
+// @version        0.1.7
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -40,7 +40,7 @@
 //////////////////////////////////////////////////////////
 
 function ncMappingScript() {
-  var versionStr = '0.1.6';
+  var versionStr = '0.1.7';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
 
@@ -55,7 +55,6 @@ function ncMappingScript() {
   // Catches error if there is no tile description i.e. - your character is dead
   try {
     var tiledescription = document.getElementsByClassName('tile_description')[0].innerText;
-    var inCheck = tiledescription.match(/standing\sinside/);
   }
   catch(error) {
     logNCms("No tile description");
@@ -69,22 +68,24 @@ function ncMappingScript() {
   var yCoord = tiledescription.match(/(?<=\,\s)\d{1,2}(?!=\s\w)/);
   var yInt = parseInt(yCoord);
   var mapinfo = document.getElementById('Map');
+
+  //Some basic checks to make sure proper data is available
+  var inCheck = tiledescription.match(/standing\soutside/);
   if (mapinfo == null) {
     logNCms("Map pane not open or no map data!");
+    return;
+  }
+  if (inCheck == null) {
+    logNCms("Not currently outside.");
     return;
   }
 
   // loads map table and splits cells to grab bgcolor of tiles
   var table = document.getElementById('Map');
   var cells = table.getElementsByTagName('td');
-
-  var bgcolors = []
+  var bgcolors = [];
   for (var i = 0, len = cells.length; i < len; i++) {
     if (/\#....../.test(cells[i].getAttribute("bgcolor")) == true) bgcolors.push(cells[i].getAttribute("bgcolor"));
-  }
-
-  for (var k = 0; k < bgcolors.length; k++) {
-    console.log("bgcolors: " + bgcolors[k]);
   }
 
   //attempt to collect the proper coordinate arrays
@@ -101,8 +102,10 @@ function ncMappingScript() {
     yArray.push(yIntAdj, yIntAdj, yIntAdj, yIntAdj, yIntAdj);
   }
 
+  // Output
+  console.log("X, Y, bgcolor");
   for (var i = 0; i < xArray.length; i++) {
-    console.log("Coords: (" + xArray[i] + ", " + yArray[i] + ")  Tile Color: " + bgcolors[i])
+    console.log(xArray[i] + ", " + yArray[i] + ", " + bgcolors[i]);
   }
 
   // A simplle error logging function
