@@ -64,7 +64,9 @@ function ncMappingScript() {
 
   //Grabs the x and y coordinate of current tile and all map data stops if map not open
   var xCoord = tiledescription.match(/(?<=\s\()\d{1,2}(?!=\,\s)/);
+  var xInt = parseInt(xCoord);
   var yCoord = tiledescription.match(/(?<=\,\s)\d{1,2}(?!=\s\w)/);
+  var yInt = parseInt(yCoord);
   var mapinfo = document.getElementById('Map');
   if (mapinfo == null) {
     logNCms("Map pane not open or no map data!");
@@ -83,6 +85,15 @@ function ncMappingScript() {
   for (var k = 0; k < bgcolors.length; k++) {
     console.log("bgcolors: " + bgcolors[k]);
   }
+
+  //attempt to collect the proper coordinate arrays
+  // X coords
+  var xArray = []
+  for (var i = 0; i < 4; i++) {
+    for (var j = -2; j < 2; j++) {xArray.push(String(xInt + j))}
+  }
+
+  for (var i = 0; i < xArray.length; i++) {console.log(xArray[i])}
 
   // A simplle error logging function
     function logNCms(message, verbose=false) {
