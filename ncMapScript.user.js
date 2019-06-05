@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.10
+// @version        0.1.11
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -15,33 +15,47 @@
 // @grant          GM.getValue
 // @grant          GM.setValue
 // @grant          GM.deleteValue
-// @grant          GM.
-// @require     https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.js
+// @grant          GM_xmlhttpRequest
+// @grant          GM.xmlhttpRequest
 // ==/UserScript==
-
-////////////////////////
-// A Note from plscks //
-////////////////////////
+//
+//
+//####################//
+//~A Note from plscks~//
+//####################//
 // Hi! Please hang with me
 // I have no idea how userscripts work
 // but in my defense I had no idea how
 // Google Apps Scripts worked a day before
 // I started this and well, here we are!
+// Also, I'm so sorry for my sloppy code, but
+// I'm still trying to grasp most of this!
 // None of this is intended to be stolen code
-// it is mearly borrowed code, I'm still digesting
-// how much of the borrowed code I really need.
-// Anyways, to give credit where credit
-// is due, this is all from AnneTrue who
-// did an completely amazing job with LibC to
-// begin with! Thanks for the inspiration
-// AnneTrue.
+// but some is borrowed from various
+// places. By the way thanks for the inspiration
+// AnneTrue, couldn't have done it without
+// your help!
+//#############################################################################
 //
-// AnneTrue/LibConglomerate
-// https://github.com/AnneTrue/libConglomerate
-//////////////////////////////////////////////////////////
-
+//#####################//
+//~STUFF TO ACCOMPLISH~//
+//#####################//
+// [x] pull coords out
+// [x] pull tile color out
+// [x] output in csv format to something??
+// [x] moderate level of checks to see if runs
+// [ ] pull plane information
+// [ ] pull description minus door/light/day/night status
+// [ ] pull tile name
+// [ ] pull tile type
+// [ ] store data accross page loads, export all once disconnected
+//#####################//
+//~THE GOOD(ISH) STUFF~//
+//#####################//
+//~~~is this a test?~~~//
+//~~~~it has to be~~~~~//
 function ncMappingScript() {
-  var versionStr = '0.1.10';
+  var versionStr = '0.1.11';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
 
@@ -51,7 +65,7 @@ function ncMappingScript() {
         this.GM_setValue = (key, value) => { localStorage[key] = value; return true; };
         this.GM_deleteValue = function (key) { return delete localStorage[key]; };
       }
-  } catch (e) { logNCms('GM_set/get error: ' + e.message); }
+  } catch (e) { logNCms('GM_set/get error: ' + e.message); };
 
   // Catches error if there is no tile description i.e. - your character is dead
   try {
@@ -61,7 +75,6 @@ function ncMappingScript() {
     logNCms("No tile description");
     return;
   }
-
 
   //Grabs the x and y coordinate of current tile and all map data stops if map not open
   var xCoord = tiledescription.match(/(?<=\s\()\d{1,2}(?!=\,\s)/);
@@ -93,7 +106,7 @@ function ncMappingScript() {
   // X coords
   var xArray = [];
   for (var i = 0; i < 5; i++) {
-    for (var j = -2; j < 3; j++) {xArray.push(String(xInt + j))}
+    for (var j = -2; j < 3; j++) {xArray.push(String(xInt + j))};
   }
 
   // Y coords D:
@@ -104,12 +117,12 @@ function ncMappingScript() {
   }
 
   // Output
-  var output = []
+  var output = [];
   for (var i = 0; i < xArray.length; i++) {
     output.push(xArray[i] + ", " + yArray[i] + ", " + bgcolors[i]);
   }
 
-  // Output to pastebin
+  // Output to csv file for each page load
   var a = document.createElement('a');
   a.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(output.join("\n"));
   //supported by chrome 14+ and firefox 20+
@@ -120,9 +133,9 @@ function ncMappingScript() {
   a.click();
 
   // A simplle error logging function
-    function logNCms(message, verbose=false) {
-    if (!NCmsLogging) { return; }
-    if (verbose && !NCmsLoggingVerbose) { return; }
+  function logNCms(message, verbose=false) {
+    if (!NCmsLogging) { return; };
+    if (verbose && !NCmsLoggingVerbose) { return; };
     console.log('[NCms] [ver:'+versionStr+']:  '+message);
   }
 }
