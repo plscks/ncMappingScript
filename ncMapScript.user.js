@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.14
+// @version        0.1.15
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -57,7 +57,7 @@
 var output = [];
 
 function ncMappingScript(output) {
-  var versionStr = '0.1.14';
+  var versionStr = '0.1.15';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
 
@@ -145,5 +145,11 @@ function saveOutput(output) {
   a.click();
 }
 
-output.push(ncMappingScript(output));
-console.log(output);
+GM_setValue(output.push(ncMappingScript(output)), []);
+
+temp = /\(<a href="modules.php\?name=name=Game&op=disconnect/.exec(ppl)
+if (temp) {
+  console.log("Disconnected")
+}
+
+// console.log(output);
