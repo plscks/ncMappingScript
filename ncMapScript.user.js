@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.5
+// @version        0.1.6
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -40,7 +40,7 @@
 //////////////////////////////////////////////////////////
 
 function ncMappingScript() {
-  var versionStr = '0.1.5';
+  var versionStr = '0.1.6';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
 
@@ -88,12 +88,19 @@ function ncMappingScript() {
 
   //attempt to collect the proper coordinate arrays
   // X coords
-  var xArray = []
+  var xArray = [];
   for (var i = 0; i < 5; i++) {
     for (var j = -2; j < 3; j++) {xArray.push(String(xInt + j))}
   }
 
-  for (var i = 0; i < xArray.length; i++) {console.log("Row " + i + " " + xArray[i])}
+  // Y coords D:
+  var yArray = [];
+  for (var i = -2; i < 3; i++) {
+    var yIntAdj = String(yInt + i);
+    yArray.push(yIntAdj, yIntAdj, yIntAdj, yIntAdj, yIntAdj);
+  }
+
+  for (var i = 0; i < xArray.length; i++) {console.log("Coords: " + xArray[i] + ", " + yArray[i])}
 
   // A simplle error logging function
     function logNCms(message, verbose=false) {
