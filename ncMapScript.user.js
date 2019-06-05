@@ -55,6 +55,7 @@ function ncMappingScript() {
   // Catches error if there is no tile description i.e. - your character is dead
   try {
     var tiledescription = document.getElementsByClassName('tile_description')[0].innerText;
+    var inCheck = tiledescription.match(/standing\sinside/);
   }
   catch(error) {
     logNCms("No tile description");
