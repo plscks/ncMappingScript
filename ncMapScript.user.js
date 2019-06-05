@@ -93,7 +93,7 @@ function ncMappingScript() {
     for (var j = -2; j < 3; j++) {xArray.push(String(xInt + j))}
   }
 
-  for (var i = 0; i < xArray.length; i++) {console.log(xArray[i])}
+  for (var i = 0; i < xArray.length; i++) {console.log("Row " + i + " " + xArray[i])}
 
   // A simplle error logging function
     function logNCms(message, verbose=false) {
