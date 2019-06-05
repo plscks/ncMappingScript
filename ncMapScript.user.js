@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.7
+// @version        0.1.8
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -15,7 +15,8 @@
 // @grant          GM.getValue
 // @grant          GM.setValue
 // @grant          GM.deleteValue
-// @grant          GM.getResourceUrl
+// @grant          GM.
+// @require     https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.js
 // ==/UserScript==
 
 ////////////////////////
@@ -40,7 +41,7 @@
 //////////////////////////////////////////////////////////
 
 function ncMappingScript() {
-  var versionStr = '0.1.7';
+  var versionStr = '0.1.8';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
 
@@ -103,10 +104,14 @@ function ncMappingScript() {
   }
 
   // Output
-  console.log("X, Y, bgcolor");
+  var output = []
   for (var i = 0; i < xArray.length; i++) {
-    console.log(xArray[i] + ", " + yArray[i] + ", " + bgcolors[i]);
+    output.push(xArray[i] + ", " + yArray[i] + ", " + bgcolors[i]);
   }
+
+  // Output as File
+  var blob = new Blob([output], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, "helloWorld.txt");
 
   // A simplle error logging function
     function logNCms(message, verbose=false) {
