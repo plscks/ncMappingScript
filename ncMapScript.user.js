@@ -100,7 +100,9 @@ function ncMappingScript() {
     yArray.push(yIntAdj, yIntAdj, yIntAdj, yIntAdj, yIntAdj);
   }
 
-  for (var i = 0; i < xArray.length; i++) {console.log("Coords: " + xArray[i] + ", " + yArray[i])}
+  for (var i = 0; i < xArray.length; i++) {
+    console.log("Coords: (" + xArray[i] + ", " + yArray[i] + ")  Tile Color: " + bgcolors[i])
+  }
 
   // A simplle error logging function
     function logNCms(message, verbose=false) {
