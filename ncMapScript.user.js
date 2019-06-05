@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.12
+// @version        0.1.13
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -57,7 +57,7 @@
 var output = [];
 
 function ncMappingScript(output) {
-  var versionStr = '0.1.12';
+  var versionStr = '0.1.13';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
 
@@ -144,5 +144,5 @@ function saveOutput(output) {
   }
 }
 
-output.push(ncMappingScript(output);
+output.push(ncMappingScript(output));
 console.log(output);
