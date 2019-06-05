@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.13
+// @version        0.1.14
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -57,7 +57,7 @@
 var output = [];
 
 function ncMappingScript(output) {
-  var versionStr = '0.1.13';
+  var versionStr = '0.1.14';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
 
@@ -122,6 +122,14 @@ function ncMappingScript(output) {
   for (var i = 0; i < xArray.length; i++) {
     output.push(xArray[i] + ", " + yArray[i] + ", " + bgcolors[i]);
   }
+
+  // A simplle error logging function
+  function logNCms(message, verbose=false) {
+    if (!NCmsLogging) { return; };
+    if (verbose && !NCmsLoggingVerbose) { return; };
+    console.log('[NCms] [ver:'+versionStr+']:  '+message);
+  }
+
   return output;
 }
 
@@ -135,13 +143,6 @@ function saveOutput(output) {
   document.getElementsByTagName('body')[0].appendChild(a);
   //supported by chrome 20+ and firefox 5+
   a.click();
-
-  // A simplle error logging function
-  function logNCms(message, verbose=false) {
-    if (!NCmsLogging) { return; };
-    if (verbose && !NCmsLoggingVerbose) { return; };
-    console.log('[NCms] [ver:'+versionStr+']:  '+message);
-  }
 }
 
 output.push(ncMappingScript(output));
