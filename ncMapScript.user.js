@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.15
+// @version        0.1.16
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -40,26 +40,25 @@
 //#####################//
 //~STUFF TO ACCOMPLISH~//
 //#####################//
-// [x] pull coords out
-// [x] pull tile color out
-// [x] output in csv format to something??
+// [X] pull coords out
+// [X] pull tile color out
+// [X] output in csv format to something??
 // [x] moderate level of checks to see if runs
 // [ ] pull plane information
 // [ ] pull description minus door/light/day/night status
 // [ ] pull tile name
 // [ ] pull tile type
-// [ ] store data accross page loads, export all once disconnected
+// [x] store data across page loads, export all once disconnected
 //#####################//
 //~THE GOOD(ISH) STUFF~//
 //#####################//
 //~~~is this a test?~~~//
 //~~~~it has to be~~~~~//
-var output = [];
-
-function ncMappingScript(output) {
-  var versionStr = '0.1.15';
+function ncMappingScript() {
+  var versionStr = '0.1.16';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
+  var output = [];
 
   try {
     if (!this.GM_getValue || (this.GM_getValue.toString && this.GM_getValue.toString().indexOf('not supported') > -1)) {
@@ -145,11 +144,14 @@ function saveOutput(output) {
   a.click();
 }
 
-GM_setValue(output.push(ncMappingScript(output)), []);
-
-temp = /\(<a href="modules.php\?name=name=Game&op=disconnect/.exec(ppl)
-if (temp) {
-  console.log("Disconnected")
+var test = []
+var main = ncMappingScript();
+if (main == null || main == undefined){
+    saveOutput(GM_getValue('output'));
+    GM_setValue('output', []);
+    return;
 }
 
-// console.log(output);
+test = GM_getValue('output');
+var temp = test.concat(main)
+var outPut = GM_setValue('output', temp);
