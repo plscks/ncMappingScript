@@ -51,6 +51,7 @@
 // [x] Store data across page loads, export all once disconnected
 // [ ] Fix program structure and flow
 // [ ] Tile description collection
+// [ ] Format tile info in hypermap formatting
 // [ ] Tile description output as a seperate csv file
 // [ ] Button for exporting mapdata csv file
 // [ ] Check box for enable/disable data collection
