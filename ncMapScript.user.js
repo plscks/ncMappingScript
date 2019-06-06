@@ -40,15 +40,20 @@
 //#####################//
 //~STUFF TO ACCOMPLISH~//
 //#####################//
-// [X] pull coords out
-// [X] pull tile color out
-// [X] output in csv format to something??
-// [x] moderate level of checks to see if runs
-// [ ] pull plane information
-// [ ] pull description minus door/light/day/night status
-// [ ] pull tile name
-// [ ] pull tile type
-// [x] store data across page loads, export all once disconnected
+// [X] Pull coords out
+// [X] Pull tile color out
+// [X] Output in csv format to something??
+// [x] Moderate level of checks to see if runs
+// [ ] Pull plane information
+// [ ] Pull description minus door/light/day/night status
+// [ ] Pull tile name
+// [ ] Pull tile type
+// [x] Store data across page loads, export all once disconnected
+// [ ] Fix program structure and flow
+// [ ] Tile description collection
+// [ ] Tile description output as a seperate csv file
+// [ ] Button for exporting mapdata csv file
+// [ ] Check box for enable/disable data collection
 //#####################//
 //~THE GOOD(ISH) STUFF~//
 //#####################//
