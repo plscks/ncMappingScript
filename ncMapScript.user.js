@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.16
+// @version        0.1.17
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -60,19 +60,26 @@
 //#####################//
 //~~~is this a test?~~~//
 //~~~~it has to be~~~~~//
-function ncMappingScript() {
-  var versionStr = '0.1.16';
+try {
+  if (!this.GM_getValue || (this.GM_getValue.toString && this.GM_getValue.toString().indexOf('not supported') > -1)) {
+      this.GM_getValue = (key, def) => { localStorage[key] || def; };
+      this.GM_setValue = (key, value) => { localStorage[key] = value; return true; };
+      this.GM_deleteValue = function (key) { return delete localStorage[key]; };
+    }
+} catch (e) { logNCms('GM_set/get error: ' + e.message); };
+
+// A simplle error logging function
+function logNCms(message, verbose=false) {
+  var versionStr = '0.1.17';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
-  var output = [];
+  if (!NCmsLogging) { return; };
+  if (verbose && !NCmsLoggingVerbose) { return; };
+  console.log('[NCms] [ver:'+versionStr+']:  '+message);
+}
 
-  try {
-    if (!this.GM_getValue || (this.GM_getValue.toString && this.GM_getValue.toString().indexOf('not supported') > -1)) {
-        this.GM_getValue = (key, def) => { localStorage[key] || def; };
-        this.GM_setValue = (key, value) => { localStorage[key] = value; return true; };
-        this.GM_deleteValue = function (key) { return delete localStorage[key]; };
-      }
-  } catch (e) { logNCms('GM_set/get error: ' + e.message); };
+function ncMappingScript() {
+  var output = [];
 
   // Catches error if there is no tile description i.e. - your character is dead
   try {
@@ -128,13 +135,6 @@ function ncMappingScript() {
     output.push(xArray[i] + ", " + yArray[i] + ", " + bgcolors[i]);
   }
 
-  // A simplle error logging function
-  function logNCms(message, verbose=false) {
-    if (!NCmsLogging) { return; };
-    if (verbose && !NCmsLoggingVerbose) { return; };
-    console.log('[NCms] [ver:'+versionStr+']:  '+message);
-  }
-
   return output;
 }
 
@@ -152,9 +152,14 @@ function saveOutput(output) {
 
 var test = []
 var main = ncMappingScript();
+
 if (main == null || main == undefined){
     saveOutput(GM_getValue('output'));
     GM_setValue('output', []);
+    return;
+}
+if (test == undefined || test == null) {
+    GM_setValue('output', main);
     return;
 }
 
