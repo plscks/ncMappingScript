@@ -133,7 +133,7 @@ function ncMappingScript() {
 
   // Output
   for (var i = 0; i < xArray.length; i++) {
-    output.push(xArray[i] + ", " + yArray[i] + ", " + plane + bgcolors[i]);
+    output.push(xArray[i] + ", " + yArray[i] + ", " + plane + ", " + bgcolors[i]);
   }
 
   return output;
