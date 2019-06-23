@@ -95,7 +95,8 @@ print(decodeLocation(map[30][16]))
 print(mainColors[int(map[30][16])])
 print(mainColors)
 # make a figure + axes
-fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(19,19))
+#fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(19,19))
+fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(16.81,16.81))
 
 # make color map
 my_cmap = matplotlib.colors.ListedColormap(mainColors)
@@ -116,4 +117,4 @@ ax.imshow(map, interpolation='none', cmap=my_cmap, norm=norm, extent=[0, N, 0, N
 ax.axis('off')
 
 # Output png
-plt.savefig('valhalla.png')
+plt.savefig('valhalla.png', dpi=100)
