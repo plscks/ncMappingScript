@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.18
+// @version        0.1.19
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -70,7 +70,7 @@ try {
 
 // A simplle error logging function
 function logNCms(message, verbose=false) {
-  var versionStr = '0.1.18';
+  var versionStr = '0.1.19';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
   if (!NCmsLogging) { return; };
