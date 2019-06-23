@@ -11,10 +11,10 @@
 #############
 ##  GOALS  ##
 #############
-# [] - Load csv file and aqcuire data
-# [] - Assemble data array where physical location stores the encoded coordinate data
-# [] - Store hex color in that space of the color map
-# [] - print map to file
+# [X] - Load csv file and aqcuire data
+# [X] - Assemble data array where physical location stores the encoded coordinate data
+# [X] - Store hex color in that space of the color map
+# [X] - print map to file
 # [] - Take outer planes into consideration
 import csv
 import math
@@ -96,7 +96,7 @@ print(mainColors[int(map[30][16])])
 print(mainColors)
 # make a figure + axes
 #fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(19,19))
-fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(16.81,16.81))
+fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(1.681,1.681))
 
 # make color map
 my_cmap = matplotlib.colors.ListedColormap(mainColors)
@@ -117,4 +117,4 @@ ax.imshow(map, interpolation='none', cmap=my_cmap, norm=norm, extent=[0, N, 0, N
 ax.axis('off')
 
 # Output png
-plt.savefig('valhalla.png', dpi=100)
+plt.savefig('valhalla.png', dpi=1000)
