@@ -31,9 +31,9 @@ function parseCSVData() {
         var y = Number(csvData[i][1]) + 1;
         var cell = X + y;
         cell = cell.replace(/\s/g, '');
-        Logger.log("Cell: " + cell + " Color: " + csvData[i][2]);
+        Logger.log("Cell: " + cell + " Color: " + csvData[i][3]);
         var range = sheet.getRange(cell);
-        range.setBackground(csvData[i][2]);
+        range.setBackground(csvData[i][3]);
         continue;
       }
       x = x - 26;
@@ -41,17 +41,17 @@ function parseCSVData() {
       var y = Number(csvData[i][1]) + 1;
       var cell = X + y;
       cell = cell.replace(/\s/g, '');
-      Logger.log("Cell: " + cell + " Color: " + csvData[i][2]);
+      Logger.log("Cell: " + cell + " Color: " + csvData[i][3]);
       var range = sheet.getRange(cell);
-      range.setBackground(csvData[i][2]);
+      range.setBackground(csvData[i][3]);
     } else {
       var X = String.fromCharCode(x);
       var y = Number(csvData[i][1]) + 1;
       var cell = X + y;
       cell = cell.replace(/\s/g, '');
-      Logger.log("Cell: " + cell + " Color: " + csvData[i][2]);
+      Logger.log("Cell: " + cell + " Color: " + csvData[i][3]);
       var range = sheet.getRange(cell);
-      range.setBackground(csvData[i][2]);
+      range.setBackground(csvData[i][3]);
     }
   }
 }

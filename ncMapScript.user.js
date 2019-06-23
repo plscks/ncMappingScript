@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           NCms
-// @version        0.1.17
+// @version        0.1.18
 // @description    Nexus Clash map data to csv
 // @namespace      https://github.com/plscks/
 // @author         plscks
@@ -44,7 +44,7 @@
 // [X] Pull tile color out
 // [X] Output in csv format to something??
 // [x] Moderate level of checks to see if runs
-// [ ] Pull plane information
+// [x] Pull plane information
 // [ ] Pull description minus door/light/day/night status
 // [ ] Pull tile name
 // [ ] Pull tile type
@@ -70,7 +70,7 @@ try {
 
 // A simplle error logging function
 function logNCms(message, verbose=false) {
-  var versionStr = '0.1.17';
+  var versionStr = '0.1.18';
   var NCmsLogging = true;
   var NCmsLoggingVerbose = false;
   if (!NCmsLogging) { return; };
@@ -95,6 +95,7 @@ function ncMappingScript() {
   var xInt = parseInt(xCoord);
   var yCoord = tiledescription.match(/(?<=\,\s)\d{1,2}(?!=\s\w)/);
   var yInt = parseInt(yCoord);
+  var plane = tiledescription.match(/(?<=\,\s\d{1,2}\s)\w*(?!=\,\s)/)
   var mapinfo = document.getElementById('Map');
 
   //Some basic checks to make sure proper data is available
@@ -132,7 +133,7 @@ function ncMappingScript() {
 
   // Output
   for (var i = 0; i < xArray.length; i++) {
-    output.push(xArray[i] + ", " + yArray[i] + ", " + bgcolors[i]);
+    output.push(xArray[i] + ", " + yArray[i] + ", " + plane + bgcolors[i]);
   }
 
   return output;

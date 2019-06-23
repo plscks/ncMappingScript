@@ -16,6 +16,7 @@
 # [] - Store hex color in that space of the color map
 # [] - print map to file
 # [] - Take outer planes into consideration
+import csv
 import math
 import matplotlib.colors
 import matplotlib.pyplot as plt
@@ -34,6 +35,8 @@ def decodeLocation(val):
     result[0] = math.floor((val - result[1]*50)%50)
     return result
 
+def loadData(file):
+    """Loads external data into a list of tuples holding coord and color data"""
 
 # map size (N x N)
 N = 70
