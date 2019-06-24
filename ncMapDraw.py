@@ -23,6 +23,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 np.set_printoptions(threshold=sys.maxsize)
+my_dpi = 96.0
 
 def encodeLocation(x, y, plane):
     """Takes a tuple of coordinates (x, y, z) and returns a unique identifier"""
@@ -96,7 +97,7 @@ print(mainColors[int(map[30][16])])
 print(mainColors)
 # make a figure + axes
 #fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(19,19))
-fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(1.681,1.681))
+fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(40,40))
 
 # make color map
 my_cmap = matplotlib.colors.ListedColormap(mainColors)
@@ -107,8 +108,8 @@ my_cmap.set_bad(color='w')
 
 # draw the grid as black lines:'k' or white lines:'w'
 for x in range(N + 1):
-    ax.axhline(x, lw=1, color='k', zorder=5)
-    ax.axvline(x, lw=1, color='k', zorder=5)
+    ax.axhline(x, lw=/(1024*32), color='k', zorder=5)
+    ax.axvline(x, lw=/(1024*32), color='k', zorder=5)
 
 # draw the boxes
 ax.imshow(map, interpolation='none', cmap=my_cmap, norm=norm, extent=[0, N, 0, N], zorder=0)
@@ -117,4 +118,4 @@ ax.imshow(map, interpolation='none', cmap=my_cmap, norm=norm, extent=[0, N, 0, N
 ax.axis('off')
 
 # Output png
-plt.savefig('valhalla.png', dpi=1000)
+plt.savefig('valhalla.png', dpi=my_dpi)
