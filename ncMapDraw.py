@@ -108,8 +108,8 @@ my_cmap.set_bad(color='w')
 
 # draw the grid as black lines:'k' or white lines:'w'
 for x in range(N + 1):
-    ax.axhline(x, lw=/(1024*32), color='k', zorder=5)
-    ax.axvline(x, lw=/(1024*32), color='k', zorder=5)
+    ax.axhline(x, lw=my_dpi/(1024*32), color='k', zorder=5)
+    ax.axvline(x, lw=my_dpi/(1024*32), color='k', zorder=5)
 
 # draw the boxes
 ax.imshow(map, interpolation='none', cmap=my_cmap, norm=norm, extent=[0, N, 0, N], zorder=0)
