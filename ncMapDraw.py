@@ -7,6 +7,9 @@
 #
 # Onward to the show!
 #
+# Optimal settings for hi-res:
+# figsize=(16.81, 16.81)
+# dpi=1000
 #
 #############
 ##  GOALS  ##
