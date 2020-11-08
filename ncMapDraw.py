@@ -26,7 +26,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 np.set_printoptions(threshold=sys.maxsize)
-my_dpi = 96.0
+
+my_dpi = 1000.0
+#my_dpi = 96.0
 
 def encodeLocation(x, y, plane):
     """Takes a tuple of coordinates (x, y, z) and returns a unique identifier"""
@@ -107,7 +109,7 @@ print(mainColors)
 #fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(40,40))
 
 # Attempted setup for Amaravati
-fig, ax = plt.subplots(18, 1, tight_layout=True, figsize=(32,14))
+fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(32, 32))
 
 # make color map
 my_cmap = matplotlib.colors.ListedColormap(mainColors)
