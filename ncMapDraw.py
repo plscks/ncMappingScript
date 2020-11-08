@@ -11,6 +11,7 @@
 # figsize=(16.81, 16.81)
 # dpi=1000
 #
+# Currently set up fo Amaravati
 #############
 ##  GOALS  ##
 #############
@@ -27,7 +28,7 @@ import numpy as np
 import sys
 np.set_printoptions(threshold=sys.maxsize)
 
-my_dpi = 1000.0
+my_dpi = 500.0
 #my_dpi = 96.0
 
 def encodeLocation(x, y, plane):
@@ -120,8 +121,10 @@ my_cmap.set_bad(color='w')
 
 # draw the grid as black lines:'k' or white lines:'w'
 for x in range(N + 1):
-    ax.axhline(x, lw=my_dpi/(1024*32), color='k', zorder=5)
-    ax.axvline(x, lw=my_dpi/(1024*32), color='k', zorder=5)
+    #ax.axhline(x, lw=my_dpi/(1024*32), color='k', zorder=5)
+    #ax.axvline(x, lw=my_dpi/(1024*32), color='k', zorder=5)
+    ax.axhline(x, lw=1, color='k', zorder=5)
+    ax.axvline(x, lw=1, color='k', zorder=5)
 
 # draw the boxes
 ax.imshow(map, interpolation='none', cmap=my_cmap, norm=norm, extent=[0, N, 0, N], zorder=0)
