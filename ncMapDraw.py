@@ -44,14 +44,14 @@ def decodeLocation(val):
 def loadData():
     """Loads external data into a list of tuples holding coord and color data"""
     rawData = []
-    with open('mapdata.csv', newline='') as f:
+    with open('mapdata_Amaravati.csv', newline='') as f:
         reader = csv.reader(f)
         for row in reader:
             rawData.append(row)
     return rawData
 
 # map size (N x N)
-N = 70
+N = 32
 
 # main list of decoded coordinates
 # the encoded location will store the color
@@ -72,6 +72,8 @@ for coord in rawData:
     print(planeText)
     if planeText == ' Laurentia':
         plane = 0
+    elif planeText == ' Elysium':
+        plane = 0
     color = str.strip(coord[3])
     print(color)
     xAdj = x - 1
@@ -90,17 +92,22 @@ for coord in rawData:
 #print(mainColors)
 #print(map)
 #print(mainColors)
-print('19, 32 encoded: ' + str(map[33][20]))
-print('Should be map[33][20]')
-print(mainColors[int(map[33][20])])
-print(decodeLocation(int(map[33][20])))
-print(map[30][16])
-print(decodeLocation(map[30][16]))
-print(mainColors[int(map[30][16])])
+print('27, 7 encoded: ' + str(map[8][28]))
+print('Should be map[8][28]')
+print(mainColors[int(map[8][28])])
+print(decodeLocation(int(map[8][28])))
+print(map[10][28])
+print(decodeLocation(map[10][28]))
+print(mainColors[int(map[10][28])])
 print(mainColors)
 # make a figure + axes
 #fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(19,19))
-fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(40,40))
+
+# Setup for Laurentia
+#fig, ax = plt.subplots(1, 1, tight_layout=True, figsize=(40,40))
+
+# Attempted setup for Amaravati
+fig, ax = plt.subplots(18, 1, tight_layout=True, figsize=(32,14))
 
 # make color map
 my_cmap = matplotlib.colors.ListedColormap(mainColors)
@@ -121,4 +128,4 @@ ax.imshow(map, interpolation='none', cmap=my_cmap, norm=norm, extent=[0, N, 0, N
 ax.axis('off')
 
 # Output png
-plt.savefig('valhalla.png', dpi=my_dpi)
+plt.savefig('amaravati.png', dpi=my_dpi)
