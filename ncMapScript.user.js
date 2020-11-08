@@ -62,10 +62,10 @@
 //~~~~it has to be~~~~~//
 try {
   if (!this.GM_getValue || (this.GM_getValue.toString && this.GM_getValue.toString().indexOf('not supported') > -1)) {
-      this.GM_getValue = (key, def) => { localStorage[key] || def; };
-      this.GM_setValue = (key, value) => { localStorage[key] = value; return true; };
-      this.GM_deleteValue = function (key) { return delete localStorage[key]; };
-    }
+    this.GM_getValue = (key, def) => { localStorage[key] || def; };
+    this.GM_setValue = (key, value) => { localStorage[key] = value; return true; };
+    this.GM_deleteValue = function (key) { return delete localStorage[key]; };
+  }
 } catch (e) { logNCms('GM_set/get error: ' + e.message); };
 
 // A simplle error logging function
@@ -79,6 +79,7 @@ function logNCms(message, verbose=false) {
 }
 
 function ncMappingScript() {
+  console.log('Got this far');
   var output = [];
 
   // Catches error if there is no tile description i.e. - your character is dead
@@ -95,8 +96,11 @@ function ncMappingScript() {
   var xInt = parseInt(xCoord);
   var yCoord = tiledescription.match(/(?<=\,\s)\d{1,2}(?!=\s\w)/);
   var yInt = parseInt(yCoord);
-  var plane = tiledescription.match(/(?<=\,\s\d{1,2}\s)\w*(?!=\,\s)/)
+  var plane = tiledescription.match(/(?<=\,\s\d{1,2}\s)\w*(?!=\,\s)/);
   var mapinfo = document.getElementById('Map');
+  var tileName = tiledescription.match(/^\w+(?!=\s\(\d{1,2},\s\d{1,2}\s\w+)/);
+  var tileType = tiledescription.match(/(?<=,\sa+n*\s)\w+(?!=,\sNeighborhood)/);
+  console.log(`xCoord: ${xCoord}   yCoord: ${yCoord}   plane: ${plane}   tileName: ${tileName}   tileType: ${tileType}`);
 
   //Some basic checks to make sure proper data is available
   var inCheck = tiledescription.match(/standing\soutside/);
@@ -113,8 +117,14 @@ function ncMappingScript() {
   var table = document.getElementById('Map');
   var cells = table.getElementsByTagName('td');
   var bgcolors = [];
+  var titles = [];
+  var types = [];
   for (var i = 0, len = cells.length; i < len; i++) {
     if (/\#....../.test(cells[i].getAttribute("bgcolor")) == true) bgcolors.push(cells[i].getAttribute("bgcolor"));
+    if (/\w+,\san*\s/.test(cells[i].getAttribute("title")) == true) {
+      titles.push(cells[i].getAttribute("title").match(/^\w+\s?\w+/)[0]);
+      types.push(cells[i].getAttribute("title").match(/an?\s\w+(\s?\w+)*$/)[0]);
+    }
   }
 
   //attempt to collect the proper coordinate arrays
@@ -133,7 +143,7 @@ function ncMappingScript() {
 
   // Output
   for (var i = 0; i < xArray.length; i++) {
-    output.push(xArray[i] + ", " + yArray[i] + ", " + plane + ", " + bgcolors[i]);
+    output.push(xArray[i] + ", " + yArray[i] + ", " + plane + ", " + bgcolors[i] + ", " + titles[i] + ", " + types[i]);
   }
 
   return output;
@@ -155,13 +165,13 @@ var test = []
 var main = ncMappingScript();
 
 if (main == null || main == undefined){
-    saveOutput(GM_getValue('output'));
-    GM_setValue('output', []);
-    return;
+  saveOutput(GM_getValue('output'));
+  GM_setValue('output', []);
+  return;
 }
 if (test == undefined || test == null) {
-    GM_setValue('output', main);
-    return;
+  GM_setValue('output', main);
+  return;
 }
 
 test = GM_getValue('output');
