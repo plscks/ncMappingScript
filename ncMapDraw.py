@@ -47,7 +47,7 @@ def decodeLocation(val):
 def loadData():
     """Loads external data into a list of tuples holding coord and color data"""
     rawData = []
-    with open('mapdata_Amaravati.csv', newline='') as f:
+    with open('mapdata_draw.csv', newline='') as f:
         reader = csv.reader(f)
         for row in reader:
             rawData.append(row)
@@ -71,23 +71,26 @@ rawData = loadData()
 for coord in rawData:
     x = int(coord[0])
     y = int(coord[1])
-    planeText = coord[2]
-    print(planeText)
-    if planeText == ' Laurentia':
-        plane = 0
-    elif planeText == ' Elysium':
-        plane = 0
-    color = str.strip(coord[3])
-    print(color)
-    xAdj = x - 1
-    yAdj = y - 1
-    encodedCoord = encodeLocation(x, y, plane)
-    decodedCoord = decodeLocation(encodedCoord)
-    map[yAdj][xAdj] = encodedCoord
-    mainColors[encodedCoord] = color
-    print('x: ' + str(x) + ' y: ' + str(y) + ' Encoded: ' + str(encodedCoord) + ' Decoded: ' + str(decodedCoord) + ' Color: ' + color)
-    print('map[' + str(yAdj) + '][' + str(xAdj) + ']')
-    print(map[yAdj][xAdj])
+    if y <= 0:
+        print('Not a valid location')
+    else:
+        planeText = coord[2]
+        print(planeText)
+        if planeText == ' Laurentia':
+            plane = 0
+        elif planeText == ' Elysium':
+            plane = 0
+        color = str.strip(coord[3])
+        print(color)
+        xAdj = x - 1
+        yAdj = y - 1
+        encodedCoord = encodeLocation(x, y, plane)
+        decodedCoord = decodeLocation(encodedCoord)
+        map[yAdj][xAdj] = encodedCoord
+        mainColors[encodedCoord] = color
+        print('x: ' + str(x) + ' y: ' + str(y) + ' Encoded: ' + str(encodedCoord) + ' Decoded: ' + str(decodedCoord) + ' Color: ' + color)
+        print('map[' + str(yAdj) + '][' + str(xAdj) + ']')
+        print(map[yAdj][xAdj])
 
 # DEBUGGING STUFF
 #print('current map')
@@ -133,4 +136,4 @@ ax.imshow(map, interpolation='none', cmap=my_cmap, norm=norm, extent=[0, N, 0, N
 ax.axis('off')
 
 # Output png
-plt.savefig('amaravati.png', dpi=my_dpi)
+plt.savefig('amaravati2.png', dpi=my_dpi)
